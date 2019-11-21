@@ -514,6 +514,23 @@ public class MantenimientoMySQL {
             Toast.makeText(context, "Algo salio mal con la conexión al servidor. \nRevise su conexión a Internet.", Toast.LENGTH_LONG).show();
         }
     }) {
+        protected Map<String, String> getParams() throws AuthFailureError {
+            Map<String, String> map = new HashMap<String, String>();
+            map.put("Content-Type", "application/json; charset=utf-8");
+            map.put("Accept", "application/json");
+            map.put("codigo", String.valueOf(datos.getCodigo()));
+            map.put("descripcion", datos.getDescripcion());
+            map.put("precio", String.valueOf(datos.getPrecio()));
+                /*
+                map.put("codigo", codigo);
+                map.put("descripcion", descripcion);
+                map.put("precio", precio);
+                */
+            return map;
+
+        }
+    };
+    }
 
 
 
