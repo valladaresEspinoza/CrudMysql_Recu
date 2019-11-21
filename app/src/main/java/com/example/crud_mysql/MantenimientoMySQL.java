@@ -360,9 +360,9 @@ public class MantenimientoMySQL {
                                 String descripcion = jsonArray.getJSONObject(0).getString("descripcion");
                                 String precio = jsonArray.getJSONObject(0).getString("precio");
 
-                               datos.setCodigo(Integer.parseInt(codigo));
-                               datos.setDescripcion(descripcion);
-                               datos.setPrecio(Double.parseDouble(precio));
+                                datos.setCodigo(Integer.parseInt(codigo));
+                                datos.setDescripcion(descripcion);
+                                datos.setPrecio(Double.parseDouble(precio));
 
                                 Intent intent = new Intent(context, MainActivity.class);
                                 intent.putExtra("senal", "1");
@@ -406,7 +406,7 @@ public class MantenimientoMySQL {
 
     public ArrayList<String> consultarAllArticulos(final Context context){
 
-      final ArrayList productosList = new ArrayList<>();  //ArrayList<String>
+        final ArrayList productosList = new ArrayList<>();  //ArrayList<String>
 
         progressDialog = new ProgressDialog(context);
         progressDialog.setCancelable(false);
@@ -465,6 +465,7 @@ public class MantenimientoMySQL {
         return productosList;
     }
 
+
     //public void modificar(final Context context, final String codigo, final String descripcion, final String precio){
     public void modificar(final Context context, final Dto datos){
 
@@ -475,6 +476,7 @@ public class MantenimientoMySQL {
         progressDialog.show();
 
         String url = Config.urlActualizar;
+
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
                 url,
                 new Response.Listener<String>() {
@@ -485,54 +487,60 @@ public class MantenimientoMySQL {
                         try {
                             //Creamos un objeto JSONObject para poder acceder a los atributos (campos) del objeto. Esperando que todo
                             JSONObject respuestaJSON = new JSONObject(response.toString());                 //Creo un JSONObject a partir del StringBuilder pasado a cadena
-                    }
-                        //Accedemos al vector de resultados
-                        String resultJSON = respuestaJSON.getString("estado");   // estado es el nombre del campo en el JSON
-                        String result_msj = respuestaJSON.getString("mensaje");   // estado es el nombre del campo en el JSON
-                        if (resultJSON.equals("1")) {
 
-                            Toast toast = Toast.makeText(context, ""+result_msj, Toast.LENGTH_LONG);
-                            toast.setGravity(Gravity.CENTER, 0, 0);
-                            toast.show();
+                            //Accedemos al vector de resultados
+                            String resultJSON = respuestaJSON.getString("estado");   // estado es el nombre del campo en el JSON
+                            String result_msj = respuestaJSON.getString("mensaje");   // estado es el nombre del campo en el JSON
 
-                        } else if (resultJSON.equals("2")) {
-                            Toast toast = Toast.makeText(context, ""+result_msj, Toast.LENGTH_LONG);
-                            toast.setGravity(Gravity.CENTER, 0, 0);
-                            toast.show();
+                            if (resultJSON.equals("1")) {
+
+                                Toast toast = Toast.makeText(context, ""+result_msj, Toast.LENGTH_LONG);
+                                toast.setGravity(Gravity.CENTER, 0, 0);
+                                toast.show();
+
+                            } else if (resultJSON.equals("2")) {
+                                Toast toast = Toast.makeText(context, ""+result_msj, Toast.LENGTH_LONG);
+                                toast.setGravity(Gravity.CENTER, 0, 0);
+                                toast.show();
+                            }
+
+                            progressDialog.dismiss();
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
 
                         progressDialog.dismiss();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+
                     }
-                     progressDialog.dismiss();
-                }
-    }, new Response.ErrorListener() {
-        @Override
-        public void onErrorResponse(VolleyError error) {
-            progressDialog.dismiss();
-            Toast.makeText(context, "Algo salio mal con la conexión al servidor. \nRevise su conexión a Internet.", Toast.LENGTH_LONG).show();
-        }
-    }) {
-        protected Map<String, String> getParams() throws AuthFailureError {
-            Map<String, String> map = new HashMap<String, String>();
-            map.put("Content-Type", "application/json; charset=utf-8");
-            map.put("Accept", "application/json");
-            map.put("codigo", String.valueOf(datos.getCodigo()));
-            map.put("descripcion", datos.getDescripcion());
-            map.put("precio", String.valueOf(datos.getPrecio()));
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+                Toast.makeText(context, "Algo salio mal con la conexión al servidor. \nRevise su conexión a Internet.", Toast.LENGTH_LONG).show();
+            }
+        }) {
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("Content-Type", "application/json; charset=utf-8");
+                map.put("Accept", "application/json");
+                map.put("codigo", String.valueOf(datos.getCodigo()));
+                map.put("descripcion", datos.getDescripcion());
+                map.put("precio", String.valueOf(datos.getPrecio()));
                 /*
                 map.put("codigo", codigo);
                 map.put("descripcion", descripcion);
                 map.put("precio", precio);
                 */
-            return map;
+                return map;
 
-        }
-    };
+            }
+        };
+
         MySingleton.getInstance(context).addToRequestQueue(stringRequest);
 
-}
+    }
+
     public String informacion(Dto datos){
         String info;
         info = "Codigo = "+datos.getCodigo() + "\n" ;
@@ -540,6 +548,7 @@ public class MantenimientoMySQL {
         info += "Precio = "+datos.getPrecio() + "\n";
         return info;
     }
+
 
     public void createfile(Context context, String codigo, String descripcion, String precio){
         SharedPreferences preferences = context.getSharedPreferences("profeGamez", MODE_PRIVATE);
@@ -556,9 +565,6 @@ public class MantenimientoMySQL {
         editor.putString("precio", precio);
         editor.commit();
     }
-
-    }
-
 
 
     /*
