@@ -467,7 +467,6 @@ public class MantenimientoMySQL {
 
 
 
-
     /*
     public String obtenerCodigo(Context context) {
         SharedPreferences preferences = context.getSharedPreferences("filetime", MODE_PRIVATE);
