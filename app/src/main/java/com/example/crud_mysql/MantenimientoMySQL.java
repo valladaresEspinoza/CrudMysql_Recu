@@ -482,6 +482,10 @@ public class MantenimientoMySQL {
                     @SuppressLint("ResourceType")
                     @Override
                     public void onResponse(String response) {
+                        try {
+                            //Creamos un objeto JSONObject para poder acceder a los atributos (campos) del objeto. Esperando que todo
+                            JSONObject respuestaJSON = new JSONObject(response.toString());                 //Creo un JSONObject a partir del StringBuilder pasado a cadena
+                    }
 
 
     /*
