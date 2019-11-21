@@ -502,7 +502,9 @@ public class MantenimientoMySQL {
                         }
 
                         progressDialog.dismiss();
-
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
 
 
 
