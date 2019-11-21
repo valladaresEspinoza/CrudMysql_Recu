@@ -541,6 +541,21 @@ public class MantenimientoMySQL {
         return info;
     }
 
+    public void createfile(Context context, String codigo, String descripcion, String precio){
+        SharedPreferences preferences = context.getSharedPreferences("profeGamez", MODE_PRIVATE);
+        //OBTENIENDO LA FECHA Y HORA ACTUAL DEL SISTEMA.
+        DateFormat formatodate= new SimpleDateFormat("yyyy/MM/dd");
+        String date= formatodate.format(new Date());
+        DateFormat formatotime= new SimpleDateFormat("HH:mm:ss a");
+        String time= formatotime.format(new Date());
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("fecha", date);
+        editor.putString("hora", time);
+        editor.putString("codigo", codigo);
+        editor.putString("descripcion", descripcion);
+        editor.putString("precio", precio);
+        editor.commit();
+    }
 
     }
 
