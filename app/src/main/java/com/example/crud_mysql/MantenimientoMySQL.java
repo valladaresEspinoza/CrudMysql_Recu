@@ -489,6 +489,17 @@ public class MantenimientoMySQL {
                         //Accedemos al vector de resultados
                         String resultJSON = respuestaJSON.getString("estado");   // estado es el nombre del campo en el JSON
                         String result_msj = respuestaJSON.getString("mensaje");   // estado es el nombre del campo en el JSON
+                        if (resultJSON.equals("1")) {
+
+                            Toast toast = Toast.makeText(context, ""+result_msj, Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+
+                        } else if (resultJSON.equals("2")) {
+                            Toast toast = Toast.makeText(context, ""+result_msj, Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+                        }
 
 
     /*
