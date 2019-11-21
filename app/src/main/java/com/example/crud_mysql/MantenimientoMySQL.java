@@ -475,6 +475,7 @@ public class MantenimientoMySQL {
         progressDialog.show();
 
         String url = Config.urlActualizar;
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
 
 
     /*
