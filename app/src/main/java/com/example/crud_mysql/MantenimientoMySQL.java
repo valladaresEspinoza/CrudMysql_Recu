@@ -506,6 +506,14 @@ public class MantenimientoMySQL {
                         e.printStackTrace();
                     }
                      progressDialog.dismiss();
+                }
+    }, new Response.ErrorListener() {
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            progressDialog.dismiss();
+            Toast.makeText(context, "Algo salio mal con la conexión al servidor. \nRevise su conexión a Internet.", Toast.LENGTH_LONG).show();
+        }
+    }) {
 
 
 
