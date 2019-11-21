@@ -533,6 +533,15 @@ public class MantenimientoMySQL {
         MySingleton.getInstance(context).addToRequestQueue(stringRequest);
 
 }
+    public String informacion(Dto datos){
+        String info;
+        info = "Codigo = "+datos.getCodigo() + "\n" ;
+        info += "Descripción = "+datos.getDescripcion() + "\n";
+        info += "Precio = "+datos.getPrecio() + "\n";
+        return info;
+    }
+
+
     }
 
 
