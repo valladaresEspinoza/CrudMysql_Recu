@@ -586,6 +586,4 @@ public class MantenimientoMySQL {
         return precio;   //return preferences.getString("tiempo", "Sin configurar.");
     }
     */
-
-
 }
