@@ -486,6 +486,9 @@ public class MantenimientoMySQL {
                             //Creamos un objeto JSONObject para poder acceder a los atributos (campos) del objeto. Esperando que todo
                             JSONObject respuestaJSON = new JSONObject(response.toString());                 //Creo un JSONObject a partir del StringBuilder pasado a cadena
                     }
+                        //Accedemos al vector de resultados
+                        String resultJSON = respuestaJSON.getString("estado");   // estado es el nombre del campo en el JSON
+                        String result_msj = respuestaJSON.getString("mensaje");   // estado es el nombre del campo en el JSON
 
 
     /*
